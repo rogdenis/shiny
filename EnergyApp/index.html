@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Creating and using energy consumption application</title>
+	<meta name="description" content="Creating and using energy consumption application">
+	<meta name="author" content="Denis Rogachevsky">
+	<meta name="generator" content="slidify" />
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="libraries/frameworks/html5slides/default/styles.css">
+	<link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />  <link rel="stylesheet" href = "assets/css/ribbons.css">
+  
+</head>
+<body style='display: none'>
+	<section class='slides layout-regular template-regular'>
+     <article class="" id="slide-1" style="background:;">
+  <h3>Contents</h3>
+  <ol>
+<li>Purpose of the App</li>
+<li>Getting data</li>
+<li>Train prediction model</li>
+<li>Use the app</li>
+</ol>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Purpose of the App</h3>
+  <p>An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.<br>
+The goal of the application is to give it&#39;s users an easy way to estimate the energy consumption of their houses.</p>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Getting data</h3>
+  <p>The data is provided by the UCI machine learning repository: <a href="https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#">https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#</a><br>
+It contains 768 houses parameters and their heating and cooling values parameters.
+It is downloaded, you can use it by this code:</p>
+
+<pre><code class="r">library(xlsx)
+d &lt;- readWorksheet(loadWorkbook(&quot;energy.xlsx&quot;),sheet=1)
+names(d)&lt;-c(&quot;co&quot;,&quot;sa&quot;,&quot;wa&quot;,&quot;ra&quot;,&quot;oh&quot;,&quot;or&quot;,&quot;ga&quot;,&quot;gd&quot;,&quot;hl&quot;,&quot;cl&quot;)
+</code></pre>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Train prediction model</h3>
+  <p>The audience of the application is people who are not familiar with any field of computer science, so it should be easy to interpret the prediction model, and it should be fast as well.</p>
+
+<p>The following code makes a prediction model and saves it for server.R:</p>
+
+<pre><code class="r">library(caret)
+method=&quot;lm&quot; #your method
+ctrl &lt;- trainControl(verboseIter=TRUE,method = &quot;cv&quot;,number=10)
+cool&lt;-train(cl~sa + wa + ra + oh + or + ga + gd,d,method=method,trControl = ctrl)
+heat&lt;-train(hl~sa + wa + ra + oh + or + ga + gd,d,method=method,trControl = ctrl)
+save(cool,file=&quot;cool.RData&quot;)
+save(heat,file=&quot;heat.RData&quot;)
+</code></pre>
+
+<p>You can use any other method instead</p>
+
+</article>
+
+<article class="class" id="id" style="background:;">
+  <h3>Use the app</h3>
+  <p>By itself the app is really simple, it consists of sliders and one radio button block. As the user changes the value of each input block, we recalculate the load values.</p>
+
+</article>
+
+  </section>
+</body>
+  <!-- LOAD JAVASCRIPTS  -->
+	<script src='libraries/frameworks/html5slides/default/slides.js'></script>
+	<!-- LOAD HIGHLIGHTER JS FILES -->
+	<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+	 
+	</html>

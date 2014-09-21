@@ -1,0 +1,28 @@
+library(shiny)
+load(file="heat.RData")
+load(file="cool.RData")
+shinyServer(
+  function(input, output) {
+    #params<-reactive(as.data.frame(as.numeric(c(sa={input$sa},wa={input$wa},ra={input$ra},oh={input$oh},or={input$or},ga={input$ga},gd={input$gd}))))
+    params<-reactive({list(sa=as.numeric(input$sa),
+                           wa=as.numeric(input$wa),
+                           ra=as.numeric(input$ra),
+                           oh=as.numeric(input$oh),
+                           or=as.numeric(input$or),
+                           ga=as.numeric(input$ga),
+                           gd=as.numeric(input$gd)
+                           )})
+    heating<-reactive({predict(heat,params())})
+    cooling<-reactive({predict(cool,params())})
+    heatingvalues<-reactive({
+      data.frame(
+        Type=c("Heating","Cooling","Average"),
+        Load=c(heating(),cooling(),heating()/2+cooling()/2),
+        stringsAsFactors=FALSE
+        )
+    })
+    output$values<-renderTable({
+      heatingvalues()
+    })
+  }
+)
