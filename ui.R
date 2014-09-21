@@ -1,8 +1,11 @@
 library(shiny)
+library(XLConnect)
+d <- readWorksheet(loadWorkbook("energy.xlsx"),sheet=1)
+names(d)<-c("co","sa","wa","ra","oh","or","ga","gd","hl","cl")
 shinyUI(fluidPage(theme = "bootstrap.css",
   headerPanel("Calculate your house energy load"),
   sidebarPanel(
-    p(em("Documentation:",a("EnergyApp",href="../EnergyApp/index.html")),style="font-size:20px;"),
+    p(em("Documentation:",a("EnergyApp",href="index.html")),style="font-size:20px;"),
     sliderInput('sa', 'Surface Area',value = mean(d$sa), min = min(d$sa)*0.8, max = max(d$sa)*1.2, step = 10,),
     sliderInput('wa', 'Wall Area',value = mean(d$wa), min = min(d$wa)*0.8, max = max(d$wa)*1.2, step = 10,),
     sliderInput('ra', 'Roof Area',value = mean(d$ra), min = min(d$ra)*0.8, max = max(d$ra)*1.2, step = 10,),

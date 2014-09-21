@@ -1,6 +1,12 @@
 library(shiny)
-load(file="heat.RData")
-load(file="cool.RData")
+library(caret)
+library(XLConnect)
+d <- readWorksheet(loadWorkbook("energy.xlsx"),sheet=1)
+names(d)<-c("co","sa","wa","ra","oh","or","ga","gd","hl","cl")
+method="lm" #your method
+ctrl <- trainControl(verboseIter=TRUE,method = "cv",number=2)
+cool<-train(cl~sa + wa + ra + oh + or + ga + gd,d,method=method,trControl = ctrl)
+heat<-train(hl~sa + wa + ra + oh + or + ga + gd,d,method=method,trControl = ctrl)
 shinyServer(
   function(input, output) {
     #params<-reactive(as.data.frame(as.numeric(c(sa={input$sa},wa={input$wa},ra={input$ra},oh={input$oh},or={input$or},ga={input$ga},gd={input$gd}))))
