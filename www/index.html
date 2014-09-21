@@ -1,80 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Creating and using energy consumption application</title>
-  <meta charset="utf-8">
-  <meta name="description" content="Creating and using energy consumption application">
-  <meta name="author" content="Denis Rogachevsky">
-  <meta name="generator" content="slidify" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
-  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
-    media="only screen and (max-device-width: 480px)" >
-  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
-  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
-
+	<meta charset='utf-8'>
+	<title>Creating and using energy consumption application</title>
+	<meta name="description" content="Creating and using energy consumption application">
+	<meta name="author" content="Denis Rogachevsky">
+	<meta name="generator" content="slidify" />
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="libraries/frameworks/html5slides/default/styles.css">
+	<link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />  <link rel="stylesheet" href = "assets/css/ribbons.css">
   
-  <!-- Grab CDN jQuery, fall back to local if offline -->
-  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
-  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
-  <script data-main="libraries/frameworks/io2012/js/slides" 
-    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
-  </script>
-  
-  
-
 </head>
-<body style="opacity: 0">
-  <slides class="layout-widescreen">
-    
-    <!-- LOGO SLIDE -->
-        <slide class="title-slide segue nobackground">
-  <hgroup class="auto-fadein">
-    <h1>Creating and using energy consumption application</h1>
-    <h2></h2>
-    <p>Denis Rogachevsky<br/>Internet</p>
-  </hgroup>
-  <article></article>  
-</slide>
-    
-
-    <!-- SLIDES -->
-    <slide class="" id="slide-1" style="background:;">
-  <hgroup>
-    <h2>Contents</h2>
-  </hgroup>
-  <article data-timings="">
-    <ol>
+<body style='display: none'>
+	<section class='slides layout-regular template-regular'>
+     <article class="" id="slide-1" style="background:;">
+  <h3>Contents</h3>
+  <ol>
 <li>Purpose of the App</li>
 <li>Getting data</li>
 <li>Train prediction model</li>
 <li>Use the app</li>
 </ol>
 
-  </article>
-  <!-- Presenter Notes -->
-</slide>
+</article>
 
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>Purpose of the App</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.<br>
+<article class="class" id="id" style="background:;">
+  <h3>Purpose of the App</h3>
+  <p>An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.<br>
 The goal of the application is to give it&#39;s users an easy way to estimate the energy consumption of their houses.</p>
 
-  </article>
-  <!-- Presenter Notes -->
-</slide>
+</article>
 
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>Getting data</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>The data is provided by the UCI machine learning repository: <a href="https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#">https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#</a><br>
+<article class="class" id="id" style="background:;">
+  <h3>Getting data</h3>
+  <p>The data is provided by the UCI machine learning repository: <a href="https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#">https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#</a><br>
 It contains 768 houses parameters and their heating and cooling values parameters.
 It is downloaded, you can use it by this code:</p>
 
@@ -83,16 +43,11 @@ d &lt;- readWorksheet(loadWorkbook(&quot;energy.xlsx&quot;),sheet=1)
 names(d)&lt;-c(&quot;co&quot;,&quot;sa&quot;,&quot;wa&quot;,&quot;ra&quot;,&quot;oh&quot;,&quot;or&quot;,&quot;ga&quot;,&quot;gd&quot;,&quot;hl&quot;,&quot;cl&quot;)
 </code></pre>
 
-  </article>
-  <!-- Presenter Notes -->
-</slide>
+</article>
 
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>Train prediction model</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>The audience of the application is people who are not familiar with any field of computer science, so it should be easy to interpret the prediction model, and it should be fast as well.</p>
+<article class="class" id="id" style="background:;">
+  <h3>Train prediction model</h3>
+  <p>The audience of the application is people who are not familiar with any field of computer science, so it should be easy to interpret the prediction model, and it should be fast as well.</p>
 
 <p>The following code makes a prediction model and saves it for server.R:</p>
 
@@ -107,68 +62,23 @@ save(heat,file=&quot;heat.RData&quot;)
 
 <p>You can use any other method instead</p>
 
-  </article>
-  <!-- Presenter Notes -->
-</slide>
+</article>
 
-<slide class="class" id="id" style="background:;">
-  <hgroup>
-    <h2>Use the app</h2>
-  </hgroup>
-  <article data-timings="">
-    <p>By itself the app is really simple, it consists of sliders and one radio button block. As the user changes the value of each input block, we recalculate the load values.</p>
+<article class="class" id="id" style="background:;">
+  <h3>Use the app</h3>
+  <p>By itself the app is really simple, it consists of sliders and one radio button block. As the user changes the value of each input block, we recalculate the load values.</p>
 
-  </article>
-  <!-- Presenter Notes -->
-</slide>
+<p><img src="EnergyApp.png" alt="screenshot"></p>
 
-    <slide class="backdrop"></slide>
-  </slides>
-  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
-    <ul>
-      <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='Contents'>
-         1
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Purpose of the App'>
-         2
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Getting data'>
-         3
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Train prediction model'>
-         4
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='Use the app'>
-         5
-      </a>
-    </li>
-  </ul>
-  </div>  <!--[if IE]>
-    <script 
-      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
-    </script>
-    <script>CFInstall.check({mode: 'overlay'});</script>
-  <![endif]-->
+</article>
+
+  </section>
 </body>
-  <!-- Load Javascripts for Widgets -->
-  
-  <!-- LOAD HIGHLIGHTER JS FILES -->
-  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
-   
-  </html>
+  <!-- LOAD JAVASCRIPTS  -->
+	<script src='libraries/frameworks/html5slides/default/slides.js'></script>
+	<!-- LOAD HIGHLIGHTER JS FILES -->
+	<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+	 
+	</html>

@@ -3,7 +3,7 @@ title       : Creating and using energy consumption application
 subtitle    : 
 author      : Denis Rogachevsky 
 job         : Internet
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+framework   : html5slides        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
@@ -11,7 +11,7 @@ mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Contents
+### Contents
 
 1. Purpose of the App
 2. Getting data
@@ -20,7 +20,7 @@ knit        : slidify::knit2slides
 
 --- .class #id 
 
-## Purpose of the App
+### Purpose of the App
 
 
 An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.   
@@ -28,7 +28,7 @@ The goal of the application is to give it's users an easy way to estimate the en
 
 --- .class #id 
 
-## Getting data
+### Getting data
 
 
 The data is provided by the UCI machine learning repository: https://archive.ics.uci.edu/ml/datasets/Energy+efficiency#   
@@ -44,7 +44,7 @@ names(d)<-c("co","sa","wa","ra","oh","or","ga","gd","hl","cl")
 
 --- .class #id 
 
-## Train prediction model
+### Train prediction model
 
 The audience of the application is people who are not familiar with any field of computer science, so it should be easy to interpret the prediction model, and it should be fast as well.
    
@@ -62,6 +62,8 @@ You can use any other method instead
 
 --- .class #id 
 
-## Use the app
+### Use the app
 
 By itself the app is really simple, it consists of sliders and one radio button block. As the user changes the value of each input block, we recalculate the load values.
+
+![screenshot](EnergyApp.png)

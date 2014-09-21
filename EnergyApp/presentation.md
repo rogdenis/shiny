@@ -1,15 +1,8 @@
----
-title       : Creating and using energy consumption application
-subtitle    : 
-author      : Denis Rogachevsky 
-job         : Internet
-framework   : html5slides        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
-knit        : slidify::knit2slides
----
+## Energy load prediction app
+
+An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.   
+The goal of the application is to give it's users an easy way to estimate the energy consumption of their houses. Move the slides to estimate the load for heating and cooling
+
 
 ### Contents
 

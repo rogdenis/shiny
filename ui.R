@@ -21,7 +21,7 @@ shinyUI(fluidPage(theme = "bootstrap.css",
   mainPanel(
     
     tableOutput("values"),
-    style="position:fixed;left:500px;top:100px;font-size:20px"
+    style="font-size:20px"
     
   )
 ))

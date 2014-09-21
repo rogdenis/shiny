@@ -1,15 +1,8 @@
----
-title       : Creating and using energy consumption application
-subtitle    : 
-author      : Denis Rogachevsky 
-job         : Internet
-framework   : html5slides        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
-knit        : slidify::knit2slides
----
+## Energy load prediction app
+
+An energy load is a measurement of how much power is required per hour to heat a given space, and to maintain a desired temperature.   
+The goal of the application is to give it's users an easy way to estimate the energy consumption of their houses. Move the slides to estimate the load for heating and cooling
+
 
 ### Contents
 
@@ -35,8 +28,7 @@ The data is provided by the UCI machine learning repository: https://archive.ics
 It contains 768 houses parameters and their heating and cooling values parameters.
 It is downloaded, you can use it by this code:
 
-
-```r
+```{r echo=TRUE,eval=FALSE}
 library(XLConnect)
 d <- readWorksheet(loadWorkbook("energy.xlsx"),sheet=1)
 names(d)<-c("co","sa","wa","ra","oh","or","ga","gd","hl","cl")
@@ -50,8 +42,7 @@ names(d)<-c("co","sa","wa","ra","oh","or","ga","gd","hl","cl")
 The audience of the application is people who are not familiar with any field of computer science, so it should be easy to interpret the prediction model, and it should be fast as well.
    
 The following code makes a prediction model and saves it for server.R:
-
-```r
+```{r echo=TRUE,eval=FALSE}
 library(caret)
 method="lm" #your method
 ctrl <- trainControl(verboseIter=TRUE,method = "cv",number=10)
