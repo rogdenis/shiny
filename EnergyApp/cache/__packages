@@ -1,0 +1,10 @@
+base
+datasets
+graphics
+grDevices
+knitr
+methods
+stats
+utils
+XLConnect
+XLConnectJars
